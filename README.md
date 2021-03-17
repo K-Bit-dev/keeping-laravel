@@ -1,6 +1,12 @@
-## Summary
+# Summary
 
 This is a simple library which can be used to communicate with timemanagement tool Keeping.
+
+## Installation
+
+```
+composer require k-bit/laravel-keeping
+```
 
 ## Example for creating a new time entry
 The example below shows how you can create a new time entry in Keeping.
