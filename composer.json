@@ -11,7 +11,9 @@
   "authors": [
     {
       "name": "Xander ten Boden",
-      "email": "xander@k-bit.dev"
+      "email": "xander@k-bit.dev",
+      "homepage": "https://www.k-bit.dev",
+      "role": "Developer"
     }
   ],
   "autoload": {

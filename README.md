@@ -2,22 +2,22 @@
 
 This is a simple library which can be used to communicate with timemanagement tool Keeping.
 
-## Installation
+### Installation
 
 ```
 composer require k-bit/laravel-keeping
 ```
-
-## Example for creating a new time entry
+---
+### Example for creating a new time entry
 The example below shows how you can create a new time entry in Keeping.
 
-#### Import the required dependancies:
+Import the required dependancies:
 ```
 use KBit\LaravelKeeping\KeepingClient;
 use KBit\LaravelKeeping\Model\TimeEntry;
 ```
 
-#### Setup a connection with Keeping and set the desired organisation:
+Setup a connection with Keeping and set the desired organisation:
 ```
 $keepingClient = new KeepingClient('your-personal-token-here');
 
@@ -61,17 +61,17 @@ $keepingClient->postTimeEntry($entry);
 
 ---
 
-## Example for getting a client-based report
+### Example for getting a client-based report
 The example below retrieves a report for a specific client.
 Please refer to the Keeping API documentation for a complete list of possible query options.
 
-#### Import the required dependancies:
+Import the required dependancies:
 ```
 use KBit\LaravelKeeping\KeepingClient;
 use KBit\LaravelKeeping\Model\Report;
 ```
 
-#### Retrieve the report data:
+Retrieve the report data:
 
 ```
 $clientId = 12345;
@@ -91,7 +91,9 @@ $summary = $keepingClient->getReport($reportQuery);
 // Retrieves a Collection with TimeEntry models for all the entries that match the specified query variables.
 $timeEntriesCollection = $keepingClient->getReportTimeEntries($reportQuery);
 ```
+---
+#### TODO:
+This package supports all of the API endpoints that are currently provided by the Keeping. There are some improvements that can be made in the future:
 
-
-### TODO:
-* Pagination
+* Adding support for Keeping's paginated responses
+* Adding validation to the query parameters arrays for various endpoints

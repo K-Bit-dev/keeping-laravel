@@ -98,7 +98,6 @@ class KeepingClient
         ])
         ->getBody();
     } catch (\Exception $exception) {
-      dump($exception->getMessage());
       throw new KeepingException();
     }
 
@@ -408,13 +407,12 @@ class KeepingClient
   }
 
   /**
-   * @param Organisation $organisation
    * @param array $query
    * @return array
    * @throws \GuzzleHttp\Exception\GuzzleException
    * @throws NoOrganisationException
    */
-  public function getUsers(Organisation $organisation, array $query = []) : array
+  public function getUsers(array $query = []) : array
   {
     $this->requireOrganisation();
 
