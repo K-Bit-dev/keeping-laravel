@@ -7,24 +7,24 @@ This is a simple library which can be used to communicate with timemanagement to
 ```
 composer require k-bit/laravel-keeping
 ```
+Add the following items to your `.env` file:
+```dotenv
+KEEPING_TOKEN="XXXXX"
+KEEPING_ORGANISATION_ID="1234"
+```
+
 ---
 ### Example for creating a new time entry
 The example below shows how you can create a new time entry in Keeping.
 
 Import the required dependancies:
-```
+```php
 use KBit\LaravelKeeping\KeepingClient;
 use KBit\LaravelKeeping\Model\TimeEntry;
 ```
 
-Setup a connection with Keeping and set the desired organisation:
-```
-$keepingClient = new KeepingClient('your-personal-token-here');
-
-$organisations = $keepingClient->getOrganisations();
-
-// If you have only one organisation, you can use the 'first' function to select it
-$keepingClient->setOrganisation($organisations->first());
+Setup a connection with Keeping:
+```php
 
 ```
 
@@ -34,17 +34,14 @@ grab the first of them, and create a time entry for that project.:
 See:
 https://developer.keeping.nl/#tag/reports/paths/~1{organisation_id}~1report/get
 
-```
-// Retrieve projects
-$projects = $keepingClient->getProjects();
-
-// Let's work with the first available project from the collection
-$project = $projects->first();
+```php
+$keepingClient = new KeepingClient();
 
 // If you don't provide an ID to the getUser function as the first parameter,
 // your own user (== the one who is attached to your authorisation token) will
 // be returned as a default. 
 $user = $keepingClient->getUser();
+$project = $keepingClient->getProjects()->first();
 
 // Create a time entry
 $entry = new TimeEntry([
@@ -66,14 +63,14 @@ The example below retrieves a report for a specific client.
 Please refer to the Keeping API documentation for a complete list of possible query options.
 
 Import the required dependancies:
-```
+```php
 use KBit\LaravelKeeping\KeepingClient;
 use KBit\LaravelKeeping\Model\Report;
 ```
 
 Retrieve the report data:
 
-```
+```php
 $clientId = 12345;
 
 $reportQuery = [

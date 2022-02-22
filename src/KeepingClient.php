@@ -11,6 +11,7 @@ use GuzzleHttp\Psr7\Request as Psr7Request;
 use GuzzleHttp\Psr7\Response as Psr7Response;
 use Illuminate\Support\Collection;
 use KBit\LaravelKeeping\Exceptions\KeepingException;
+use KBit\LaravelKeeping\Exceptions\KeepingOrganisationIdMissingException;
 use KBit\LaravelKeeping\Exceptions\NoOrganisationException;
 use KBit\LaravelKeeping\Model\Client;
 use KBit\LaravelKeeping\Model\Organisation;
@@ -56,6 +57,17 @@ class KeepingClient
     $this->headers = [
       'Authorization' => 'Bearer '.$this->personalAccessToken,
     ];
+
+    $organisation = $this
+      ->getOrganisations()
+      ->where('id', env('KEEPING_ORGANISATION_ID'))
+      ->first();
+
+    if (!$organisation instanceof Organisation) {
+      throw new KeepingOrganisationIdMissingException();
+    }
+
+    $this->setOrganisation($organisation);
   }
 
   /**
