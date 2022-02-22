@@ -44,11 +44,10 @@ class KeepingClient
 
   /**
    * KeepingClient constructor.
-   * @param string $personalAccessToken
    */
-  public function __construct(string $personalAccessToken)
+  public function __construct()
   {
-    $this->personalAccessToken = $personalAccessToken;
+    $this->personalAccessToken = env('KEEPING_TOKEN');
 
     $this->client = new \GuzzleHttp\Client([
       'handler' => $this->createGuzzleHandler(),
